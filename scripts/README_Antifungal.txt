@@ -1,5 +1,8 @@
 ##READ ME FILE
 
+Requirement: R, QIIME2
+Assumptions: Mac or Linux operating system
+
 These scripts allow you to predict antifungal function from sOTU data from amplicon sequencing.  The output includes your Metadata table with additional columns of information including 
    (1) total reads associated with antifungal function,  
    (2) proportional reads associated  with antifungal function, and 
