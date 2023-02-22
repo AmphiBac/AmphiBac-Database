@@ -16,7 +16,7 @@ Four distinct sequence datasets are currently provided:
 
 (3) AmphiBac_Facilitating_2023.2: This represents all sequenced isolates that exhibited facilitating function against 1 or more *Batrachochytrium* fungi.
 
-(4) AmphiBac_InhibitoryStrict_2023.2: This represents a strict curation of the  sequenced isolates that exhibited inhibitory function against 1 or more *Batrachochytrium* fungi that has been filtered to remove isolates that are 100% matches to isolates that exhibited facilitating function. **This is the reccomended curation of the database for inhibitory predictions**
+(4) AmphiBac_InhibitoryStrict_2023.2: This represents a strict curation of the  sequenced isolates that exhibited inhibitory function against 1 or more *Batrachochytrium* fungi that has been filtered to remove isolates that are 100% matches to isolates that exhibited facilitating function. <span style="color:purple">**This is the reccomended curation of the database for inhibitory predictions**</span>
 
 ## Usage of antifungal prediction script files
 
