@@ -27,7 +27,7 @@ THis is a beta version of a python script for predictions, providing a unified w
 
 # Overview
 
-This pipeline automates antifungal function predictions using QIIME 2 and the AmphiBac reference database.
+This pipeline automates antifungal function predictions using QIIME 2 and the AmphiBac reference database. You can find the antifungal_predictions_pipeline.py script in the tools folder
 
 **Overall, it does the following:**
 
