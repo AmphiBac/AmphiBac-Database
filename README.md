@@ -6,19 +6,21 @@ The AmphiBac database contains sequence and Batrachochytrium-inhibiting function
 
 ## Current Database
 
-We have now updated and expanded this database to include over 7,900 isolates. The current release of the database is version: [AmphiBac-2023.2](https://github.com/AmphiBac/AmphiBac-Database/tree/main/AmphiBac-2023.2)
+**Current Database**: 2025.1 
+
+2025.1: This database to include  8,739 isolates. Recent updates include isolates from Brazil and New Zealand)
 
 sequence data files are provided in two formats: fasta files and qza files.
 
 Four distinct sequence datasets are currently provided:
 
-(1) AmphiBac_FullDatabase_2023.2: This represents all sequenced isolates in the database including all functional categories [inhibitory, faciliating, no effect, and not tested]
+(1) AmphiBac_FullDatabase_2025.1: This represents all sequenced isolates in the database including all functional categories [inhibitory, faciliating, no effect, and not tested]
 
-(2) AmphiBac_Inhibitory_2023.2: This represents all sequenced isolates that exhibited inhibitory function against 1 or more *Batrachochytrium* fungi.
+(2) AmphiBac_Inhibitory_2025.1: This represents all sequenced isolates that exhibited inhibitory function against 1 or more *Batrachochytrium* fungi.
 
-(3) AmphiBac_Facilitating_2023.2: This represents all sequenced isolates that exhibited facilitating function against 1 or more *Batrachochytrium* fungi.
+(3) AmphiBac_Facilitating_2025.1: This represents all sequenced isolates that exhibited facilitating function against 1 or more *Batrachochytrium* fungi.
 
-(4) AmphiBac_InhibitoryStrict_2023.2: This represents a strict curation of the  sequenced isolates that exhibited inhibitory function against 1 or more *Batrachochytrium* fungi that has been filtered to remove isolates that are 100% matches to isolates that exhibited facilitating function. <span style="color:purple">**This is the reccomended curation of the database for inhibitory predictions**</span>
+(4) AmphiBac_InhibitoryStrict_2025.1: This represents a strict curation of the sequenced isolates that exhibited inhibitory function against 1 or more *Batrachochytrium* fungi that has been filtered to remove isolates that are 100% matches to isolates that exhibited facilitating function. <span style="color:purple">**This is the reccomended curation of the database for inhibitory predictions**</span>
 
 ## Usage of antifungal prediction script files
 
