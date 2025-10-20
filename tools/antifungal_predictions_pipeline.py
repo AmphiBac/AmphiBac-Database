@@ -34,7 +34,7 @@ import shutil
 def run_cmd(cmd, desc=None):
     """Run a shell command with a description and error checking."""
     if desc:
-        print(f"\n🔹 {desc}")
+        print(f"\n- {desc}")
     print(">>>", " ".join(cmd))
     res = subprocess.run(cmd, text=True, capture_output=True)
     if res.returncode != 0:
@@ -57,7 +57,7 @@ def find_ref_qza(repo_dir, db_version, mode):
     version_dir = Path(repo_dir) / f"AmphiBac-{db_version}" / "qza"
 
     if not version_dir.exists():
-        raise FileNotFoundError(f"❌ Could not find version directory: {version_dir}")
+        raise FileNotFoundError(f" Could not find version directory: {version_dir}")
 
     name_map = {
         "full": f"AmphibBac_FullDatabase_{db_version}.qza",
@@ -71,7 +71,7 @@ def find_ref_qza(repo_dir, db_version, mode):
 
     ref_path = version_dir / name_map[mode]
     if not ref_path.exists():
-        raise FileNotFoundError(f"❌ Could not find reference QZA for mode '{mode}': {ref_path}")
+        raise FileNotFoundError(f" Could not find reference QZA for mode '{mode}': {ref_path}")
 
     return ref_path
 
@@ -97,7 +97,7 @@ def run_prediction(args, mode, ref_qza):
     for d in [output_dir, work_dir, metadata_dir]:
         ensure_dir(d)
 
-    print(f"\n🚀 Running prediction for mode: {mode.upper()}")
+    print(f"\n Running prediction for mode: {mode.upper()}")
 
     # Step 1 — Filter representative sequences
     filt_repset = work_dir / f"filtered_rep_seqs_{mode}.qza"
@@ -114,7 +114,7 @@ def run_prediction(args, mode, ref_qza):
     
     # QIIME2 requires the output dir NOT to exist — delete it if present
     if match_dir.exists():
-        print(f"⚠️  Removing existing QIIME output directory: {match_dir}")
+        print(f"  Removing existing QIIME output directory: {match_dir}")
         shutil.rmtree(match_dir)
 
     run_cmd(qiime_cmd + [
@@ -192,7 +192,7 @@ def run_prediction(args, mode, ref_qza):
     out_tsv = metadata_dir / f"Metadata_{mode}_Predictions.txt"
     merged.to_csv(out_tsv, sep="\t", index=False)
 
-    print(f"✅ Completed {mode.upper()} predictions → {out_tsv}")
+    print(f" Completed {mode.upper()} predictions → {out_tsv}")
     return out_tsv
 
 
@@ -230,7 +230,7 @@ def main(args):
 
     # --- Merge all mode metadata outputs if user ran --modes all ---
     if "all" in args.modes or (isinstance(args.modes, str) and args.modes == "all"):
-        print("\n📂 Combining metadata results from all modes...")
+        print("\n Combining metadata results from all modes...")
 
     metadata_files = {}
     for mode in ["full", "inhibitory", "inhibitory_strict", "facilitating"]:
@@ -238,13 +238,13 @@ def main(args):
         if f.exists():
             metadata_files[mode] = pd.read_csv(f, sep="\t")
         else:
-            print(f"⚠️  Warning: expected metadata file not found: {f}")
+            print(f" Warning: expected metadata file not found: {f}")
 
     if metadata_files:
         # --- Use "full" as the base (includes all original metadata) ---
         combined = metadata_files.get("full")
         if combined is None:
-            raise FileNotFoundError("❌ Could not find the 'full' mode metadata file; it is required for merging.")
+            raise FileNotFoundError(" Could not find the 'full' mode metadata file; it is required for merging.")
 
         # --- Add only predicted columns from other modes ---
         for mode, df in metadata_files.items():
@@ -257,9 +257,9 @@ def main(args):
 
         combined_out = Path(args.output_dir).resolve() / "Combined_Metadata_Predictions.txt"
         combined.to_csv(combined_out, sep="\t", index=False)
-        print(f"✅ Combined metadata written to: {combined_out}")
+        print(f" Combined metadata written to: {combined_out}")
     else:
-        print("⚠️ No metadata files found to combine.")
+        print(" No metadata files found to combine.")
 
 # -------------------------------------------------------------------------
 # CLI Interface
@@ -272,7 +272,7 @@ if __name__ == "__main__":
     ap.add_argument("--rep-seqs", required=True, help="Path to representative sequences (.qza)")
     ap.add_argument("--metadata-file", required=True, help="Path to sample metadata TSV")
     ap.add_argument("--sample-id-col", default="SampleID", help="Column in metadata containing sample IDs")
-    ap.add_argument("--amphibac-repo", default="https://github.com/YourOrg/AmphiBac-Database.git",
+    ap.add_argument("--amphibac-repo", default="https://github.com/AmphiBac/AmphiBac-Database.git",
                     help="GitHub URL for AmphiBac database repo")
     ap.add_argument("--db-version", required=True, help="AmphiBac database version (e.g., 2025.1)")
     ap.add_argument("--modes", nargs="+", default=["all"],
