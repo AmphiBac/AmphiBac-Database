@@ -46,7 +46,7 @@ You do not need to run this inside QIIME 2 — the script automatically accesses
 | Tool                          | Purpose                | Installation      |
 | ----------------------------- | ---------------------- | ----------------- |
 | conda (Anaconda or Miniconda) | environment management | Install Miniconda |
-|       QIIME 2 environment                        |   provides qiime, vsearch, and biom                     |     conda create -n qiime2-amplicon-2025.7 -c qiime2 -c conda-forge qiime2              |
+|       QIIME 2 environment                        |   provides qiime, vsearch, and biom                     |     visit Qiime2 website              |
 |  Python packages: pandas, argparse                             |      data manipulation and parsing                  |    pip install pandas argparse               |
 
 *Note*: If you are a frequent qiimer you likely have everything you need installed.  I needed to install pandas and argparse only when I trialed the script.
@@ -58,7 +58,7 @@ You do not need to run this inside QIIME 2 — the script automatically accesses
 | ----- | ----------- |
 |  --otu-table     |      Your feature table (.qza)       |
 |  --rep-seqs     |      Your representative sequences (.qza)       |
-|   --metadata-file    |     Sample metadata (.tsv)        |
+|   --metadata-file    |     Sample metadata (.tsv, tab-separated)        |
 | --db-version  | AmphiBac version (folder name on GitHub)	2025.1        |
 
 
