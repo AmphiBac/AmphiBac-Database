@@ -231,36 +231,38 @@ def main(args):
     # --- Merge all mode metadata outputs if user ran --modes all ---
     if "all" in args.modes or (isinstance(args.modes, str) and args.modes == "all"):
         print("\n Combining metadata results from all modes...")
-
-    metadata_files = {}
-    for mode in ["full", "inhibitory", "inhibitory_strict", "facilitating"]:
-        f = Path(args.output_dir) / mode / "metadata" / f"Metadata_{mode}_Predictions.txt"
-        if f.exists():
-            metadata_files[mode] = pd.read_csv(f, sep="\t")
+    
+    
+        metadata_files = {}
+        for mode in ["full", "inhibitory", "inhibitory_strict", "facilitating"]:
+            f = Path(args.output_dir) / mode / "metadata" / f"Metadata_{mode}_Predictions.txt"
+            if f.exists():
+                metadata_files[mode] = pd.read_csv(f, sep="\t")
+            else:
+                print(f" Warning: expected metadata file not found: {f}")
+    
+        if metadata_files:
+            # --- Use "full" as the base (includes all original metadata) ---
+            combined = metadata_files.get("full")
+            if combined is None:
+                raise FileNotFoundError(" Could not find the 'full' mode metadata file; it is required for merging.")
+    
+            # --- Add only predicted columns from other modes ---
+            for mode, df in metadata_files.items():
+                if mode == "full":
+                    continue
+                # Keep only SampleID and predicted columns (those starting with the mode name)
+                pred_cols = [c for c in df.columns if c.startswith(mode.capitalize())]
+                df_subset = df[["SampleID"] + pred_cols]
+                combined = combined.merge(df_subset, on="SampleID", how="left")
+    
+            combined_out = Path(args.output_dir).resolve() / "Combined_Metadata_Predictions.txt"
+            combined.to_csv(combined_out, sep="\t", index=False)
+            print(f" Combined metadata written to: {combined_out}")
         else:
-            print(f" Warning: expected metadata file not found: {f}")
-
-    if metadata_files:
-        # --- Use "full" as the base (includes all original metadata) ---
-        combined = metadata_files.get("full")
-        if combined is None:
-            raise FileNotFoundError(" Could not find the 'full' mode metadata file; it is required for merging.")
-
-        # --- Add only predicted columns from other modes ---
-        for mode, df in metadata_files.items():
-            if mode == "full":
-                continue
-            # Keep only SampleID and predicted columns (those starting with the mode name)
-            pred_cols = [c for c in df.columns if c.startswith(mode.capitalize())]
-            df_subset = df[["SampleID"] + pred_cols]
-            combined = combined.merge(df_subset, on="SampleID", how="left")
-
-        combined_out = Path(args.output_dir).resolve() / "Combined_Metadata_Predictions.txt"
-        combined.to_csv(combined_out, sep="\t", index=False)
-        print(f" Combined metadata written to: {combined_out}")
+            print(" No metadata files found to combine.")
     else:
-        print(" No metadata files found to combine.")
-
+        print("No files to combined, I'm COMPLETE!")
 # -------------------------------------------------------------------------
 # CLI Interface
 # -------------------------------------------------------------------------
