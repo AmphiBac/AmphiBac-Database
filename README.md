@@ -23,7 +23,7 @@ Four distinct sequence datasets are currently provided:
 
 # *NEW* AmphiBac Antifungal Prediction Pipeline
 
-THis is a beta version of a python script for predictions, providing a unified workflow for predicting antifungal functional profiles from Illumina amplicon data using the AmphiBac database. *Disclaimer:  this has been tested on one computer so far.* Give it a go and I welcome questions and comments on utility!
+This is a beta version of a python script for predictions, providing a unified workflow for predicting antifungal functional profiles from Illumina amplicon data using the AmphiBac database. *Disclaimer:  this has been tested on one computer so far.* Give it a go and I welcome questions and comments on utility!
 
 # Overview
 
